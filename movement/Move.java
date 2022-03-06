@@ -26,19 +26,19 @@ public class Move
 	}
 	public void mov(char move)
 	{
-		if(move=='W')
+		if(move=='w' || move=='W')
 		{
 			this.r--;
 		}
-		else if(move=='S')
+		else if(move=='s' || move=='S')
 		{
 			this.r++;
 		}
-		else if(move=='A')
+		else if(move=='a' || move=='A')
 		{
 			this.c--;
 		}
-		else if(move=='D')
+		else if(move=='d' || move=='D')
 		{
 			this.c++;
 		}

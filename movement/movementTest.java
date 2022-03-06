@@ -32,9 +32,17 @@ class movementTest
                     System.out.println("*");
                 }
             }
-            do{
-                input=JOptionPane.showInputDialog( "Make your move \nW : go up \nS : go down \nD : go right \nA : go left ");
-            }while(input.charAt(0)!='W' && input.charAt(0)!='S' && input.charAt(0)!='D' && input.charAt(0)!='A');
+            input = "";// to avoid "The local variable input may not have been initialized"
+            try{
+                do{
+                    input = JOptionPane.showInputDialog( "Make your move \nW : go up \nS : go down \nD : go right \nA : go left\nE: to exit");
+                }while((!input.equalsIgnoreCase("W")) && (!input.equalsIgnoreCase("S")) && (!input.equalsIgnoreCase("D")) && (!input.equalsIgnoreCase("A")) && (!input.equalsIgnoreCase("E")));
+            }catch(NullPointerException e){
+                System.exit(0);//quit the program
+            }
+            if(input.equalsIgnoreCase("E")){
+                break;
+            }
             move.mov(input.charAt(0));
             System.out.print("\033[H\033[2J");
             System.out.flush();
