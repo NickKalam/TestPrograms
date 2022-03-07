@@ -1,6 +1,12 @@
 package movement;
 
-public class Move
+interface Movement
+{
+	int getR();
+	int getC();
+	void mov(char move,int distance);
+}
+public class Move implements Movement 
 {
 	private int r,c;
 	private char Pl='T';
