@@ -45,7 +45,9 @@ class movementTest
                 break;
             }
             direction=input.charAt(0);
-            input=JOptionPane.showInputDialog( "How far do you want to go (number of tiles ) : ");
+            do{
+                    input =JOptionPane.showInputDialog( "How far do you want to go (number of tiles ) : ");
+            }while(Integer.parseInt(input)<=0 || input==null);
             distance=Integer.parseInt(input);
             move.mov(direction,distance);
             System.out.print("\033[H\033[2J");
