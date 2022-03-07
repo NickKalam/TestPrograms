@@ -1,48 +1,53 @@
+package movement;
 import javax.swing.JOptionPane;
-import movement.Move;
+
 class movementTest
 {
-
     public static void main(String[] args)
     {
         String input;
-        int i,j,time;
+        char direction;
+        int i, j, time,distance;
         Move move=new Move();
+
         for(time=0;time<50;time++)
         {
-            for (i=0;i<=10;i++)
-            {
-                if(i==0 || i==10)
-                {
+            for (i=0;i<=10;i++){
+                if(i==0 || i==10){
                     System.out.print(" ");
-                    for(j=1;j<9;j++)
-                    {
+                    for(j=1;j<9;j++){
                         System.out.print("*");
                     }
                     System.out.println(" ");
                 }
-                else
-                {
+                else{
                     System.out.print("*");
-                    for(j=1;j<9;j++)
-                    {
-                        if(i==move.getR() && j==move.getC())
-                        {
+                    for(j=1;j<9;j++){
+                        if(i==move.getR() && j==move.getC()){
                             System.out.print(move.getPl());
                         }
-                        else
-                        {
+                        else{
                             System.out.print(" ");
                         }
                     }
                     System.out.println("*");
                 }
             }
-            do
-            {
-                input=JOptionPane.showInputDialog( "Make your move \nW : go up \nS : go down \nD : go right \nA : go left ");
-            }while(input.charAt(0)!='W' && input.charAt(0)!='S' && input.charAt(0)!='D' && input.charAt(0)!='A');
-            move.mov(input.charAt(0));
+            input = "";// to avoid "The local variable input may not have been initialized"
+            try{
+                do{
+                    input = JOptionPane.showInputDialog( "Make your move \nW : go up \nS : go down \nD : go right \nA : go left\nE: to exit");
+                }while((!input.equalsIgnoreCase("W")) && (!input.equalsIgnoreCase("S")) && (!input.equalsIgnoreCase("D")) && (!input.equalsIgnoreCase("A")) && (!input.equalsIgnoreCase("E")));
+            }catch(NullPointerException e){
+                System.exit(0);//quit the program
+            }
+            if(input.equalsIgnoreCase("E")){
+                break;
+            }
+            direction=input.charAt(0);
+            input=JOptionPane.showInputDialog( "How far do you want to go (number of tiles ) : ");
+            distance=Integer.parseInt(input);
+            move.mov(direction,distance);
             System.out.print("\033[H\033[2J");
             System.out.flush();
         }
