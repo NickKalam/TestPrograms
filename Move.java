@@ -24,23 +24,23 @@ public class Move
 	{
 		return this.Pl;
 	}
-	public void mov(char move)
+	public void mov(char move,int distance)
 	{
-		if(move=='W')
+		if(move=='W' || move=='w')
 		{
-			this.r--;
+			this.r-=distance;
 		}
-		else if(move=='S')
+		else if(move=='S' || move=='s')
 		{
-			this.r++;
+			this.r+=distance;
 		}
-		else if(move=='A')
+		else if(move=='A' || move=='a')
 		{
-			this.c--;
+			this.c-=distance;
 		}
-		else if(move=='D')
+		else if(move=='D' || move=='d')
 		{
-			this.c++;
+			this.c+distance;
 		}
 	}
 }
