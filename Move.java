@@ -40,7 +40,7 @@ public class Move
 		}
 		else if(move=='D' || move=='d')
 		{
-			this.c+distance;
+			this.c+=distance;
 		}
 	}
 }
