@@ -3,50 +3,36 @@ import javax.swing.JOptionPane;
 
 class movementTest
 {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args){
         String input;
-        int i, j, time;
-        Move move=new Move();
+        Area move = new Area();
 
-        for(time=0;time<50;time++)
-        {
-            for (i=0;i<=10;i++){
-                if(i==0 || i==10){
-                    System.out.print(" ");
-                    for(j=1;j<9;j++){
-                        System.out.print("*");
-                    }
-                    System.out.println(" ");
-                }
-                else{
-                    System.out.print("*");
-                    for(j=1;j<9;j++){
-                        if(i==move.getR() && j==move.getC()){
-                            System.out.print(move.getPl());
-                        }
-                        else{
-                            System.out.print(" ");
-                        }
-                    }
-                    System.out.println("*");
-                }
-            }
+        while(true){
+            move.printArea();
             input = "";// to avoid "The local variable input may not have been initialized"
             try{
                 do{
-                    input = JOptionPane.showInputDialog( "Make your move \nW : go up \nS : go down \nD : go right \nA : go left\nE: to exit");
-                }while((!input.equalsIgnoreCase("W")) && (!input.equalsIgnoreCase("S")) && (!input.equalsIgnoreCase("D")) && (!input.equalsIgnoreCase("A")) && (!input.equalsIgnoreCase("E")));
-            }catch(NullPointerException e){
+                    input = JOptionPane.showInputDialog( "Make your move \nW : go up \nS : go down \nD : go right \nA : go left");
+                }while((!input.equalsIgnoreCase("W")) && (!input.equalsIgnoreCase("S")) && (!input.equalsIgnoreCase("D")) && (!input.equalsIgnoreCase("A")));            
+            }
+            catch(NullPointerException e){
                 System.exit(0);//quit the program
             }
-            if(input.equalsIgnoreCase("E")){
-                break;
-            }
-            move.mov(input.charAt(0));
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
+
+            char direction = input.charAt(0);
+            int numOfTiles = 1;// to avoid "The local variable numOfTiles may not have been initialized"
+            do{
+                input = JOptionPane.showInputDialog( "How far do you want to go (number of tiles ) : ", numOfTiles);
+                if(input == null){break;}
+                try{
+                    numOfTiles = Integer.parseInt(input);
+                    move.mov(direction, numOfTiles);
+                }
+                catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "Invalid input", "Error", JOptionPane.ERROR_MESSAGE);
+                    numOfTiles = -1;
+                }
+            }while(numOfTiles <= 0);
         }
-        System.exit(0);
     }
 }
