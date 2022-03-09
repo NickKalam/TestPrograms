@@ -32,10 +32,10 @@ int main(void)
 	while(1)
 	{
 		fgets(ar,CHAR_IN_LINE,stdin);
-		fprintf(cProgram,"%s",ar);
-		ar[strlen(ar)-1]='\0';
-		if(strcmp(ar,"/*exit*/")==0)
+		if(strcmp(ar,"/*exit*/\n")==0)
 			break;
+		fprintf(cProgram,"%s",ar);
+
 	}
 	fclose(cProgram);
 	return 0;
