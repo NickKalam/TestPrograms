@@ -7,7 +7,7 @@ void pickLang(char extens[]);
 int main(void)
 {
 	char ar[CHAR_IN_LINE],programName[100],extens[6];
-	FILE *cProgram;
+	FILE *Program;
 	
 	printf("Welcome to my  program editor \n");
 	sleep(3);
@@ -19,8 +19,8 @@ int main(void)
         programName[strlen(programName)-1]='\0';
 	strcat(programName,extens);
 
-	cProgram=fopen(programName,"w");
-	if(cProgram == NULL)
+	Program=fopen(programName,"w");
+	if(Program == NULL)
 	{
 		printf("failure \n");
 		exit(EXIT_FAILURE );
@@ -34,10 +34,10 @@ int main(void)
 		fgets(ar,CHAR_IN_LINE,stdin);
 		if(strcmp(ar,"/*exit*/\n")==0)
 			break;
-		fprintf(cProgram,"%s",ar);
+		fprintf(Program,"%s",ar);
 
 	}
-	fclose(cProgram);
+	fclose(Program);
 	return 0;
 }
 
