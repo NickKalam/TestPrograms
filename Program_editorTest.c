@@ -8,21 +8,26 @@ int main(void)
 {
 	char ar[CHAR_IN_LINE],programName[100],extens[6];
 	FILE *cProgram;
+	
 	printf("Welcome to my  program editor \n");
 	sleep(3);
 	system("clear");
-	pickLang(extens);
+	pickLang(extens);/*call function to pick the programming language */
+	
 	printf("Give the name of your program (it will be appended with %s automatically ) : ",extens);
 	fgets(programName,100,stdin);
-   programName[strlen(programName)-1]='\0';
+        programName[strlen(programName)-1]='\0';
 	strcat(programName,extens);
-	printf("%s\n",programName);
+
 	cProgram=fopen(programName,"w");
 	if(cProgram == NULL)
 	{
 		printf("failure \n");
 		exit(EXIT_FAILURE );
 	}
+	system("clear");
+	
+	printf("%s\n",programName);
 	printf("Type /*exit*/ to exit \n");
 	while(1)
 	{
@@ -41,7 +46,7 @@ void pickLang(char extens[])
 	char lang;
 	do
 	{
-		printf("Pick the language of the program : \n1.C \n2.C++ \n3.Java \n4.Pascal \n ");
+		printf("Pick the language of the program : \n1.C \n2.C++ \n3.Java \n4.Pascal \n");
 		scanf("%c",&lang);
 		getchar();
 		system("clear");
