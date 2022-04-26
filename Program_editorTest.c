@@ -37,6 +37,9 @@ int main(void)
 		fprintf(Program,"%s",ar);
 
 	}
+	System("clear");
+	
+	showFile(Program);
 	fclose(Program);
 	return 0;
 }
@@ -44,31 +47,43 @@ int main(void)
 void pickLang(char extens[])
 {
 	char lang;
-	do
+	
+	while(1)
 	{
 		printf("Pick the language of the program : \n1.C \n2.C++ \n3.Java \n4.Pascal \n");
 		scanf("%c",&lang);
 		getchar();
 		system("clear");
-	}while(lang!='1' && lang!='2' && lang!='3' && lang!='4');
+		
+		switch(lang)
+		{
+			case '1' :
+				strcpy(extens,".c");
+			return ;
 
-	switch(lang)
+			case '2' :
+				strcpy(extens,".cpp");
+			return ;
+
+			case '3':
+				strcpy(extens,".java");
+			return ;
+
+			case '4' :
+				strcpy(extens,".pas");
+			return ;
+		}
+	}	
+}
+
+void showFile(FILE *fp)
+{
+	rewind(fp);
+	char c;
+	c=fgetc(fp);
+	while(c!=EOF)
 	{
-		case '1' :
-			strcpy(extens,".c");
-		break;
-
-		case '2' :
-			strcpy(extens,".cpp");
-		break;
-
-		case '3':
-			strcpy(extens,".java");
-		break;
-
-		default :/*if the user picked  pascal */
-			strcpy(extens,".pas");
-		break;
+		printf("%c",c);
+		c=fgetc(fp);
 	}
-	
 }
