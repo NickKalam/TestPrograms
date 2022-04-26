@@ -4,6 +4,7 @@
 #include<stdlib.h>
 #define CHAR_IN_LINE 255 /*each line can have 255 characters */
 void pickLang(char extens[]);
+void showFile(FILE *fp);
 int main(void)
 {
 	char ar[CHAR_IN_LINE],programName[100],extens[6];
@@ -19,7 +20,7 @@ int main(void)
         programName[strlen(programName)-1]='\0';
 	strcat(programName,extens);
 
-	Program=fopen(programName,"w");
+	Program=fopen(programName,"w+");
 	if(Program == NULL)
 	{
 		printf("failure \n");
@@ -37,8 +38,7 @@ int main(void)
 		fprintf(Program,"%s",ar);
 
 	}
-	System("clear");
-	
+	system("clear");
 	showFile(Program);
 	fclose(Program);
 	return 0;
