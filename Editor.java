@@ -183,9 +183,6 @@ public class Editor extends JFrame implements ActionListener
 		this.setTitle("EDITOR");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1200, 720);
-		this.setVisible(true);
-		
-
 	}
 	
 	public void actionPerformed(ActionEvent event)
