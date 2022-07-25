@@ -5,6 +5,7 @@ public class Main {
 	{
 		Editor editor=new Editor();
 		
+		editor.setVisible(true);
 		while(true)
 		{
 			editor.Time().setText( editor.setTime()+" |" );
