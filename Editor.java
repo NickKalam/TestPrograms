@@ -52,17 +52,17 @@ public class Editor extends JFrame implements ActionListener
 	private  TextArea text=new TextArea("",50,125);
 	private  JTextField title=new JTextField();
 	
-	JMenuItem saveButton=new JMenuItem("Save ");
-	JMenuItem editButton=new JMenuItem("Open");
-	JMenuItem exitButton=new JMenuItem("Exit");
-	JMenuItem colorButton=new JMenuItem("Text Color");
-	JMenuItem backgroundButton=new JMenuItem("Background Color");
-	JMenuItem textBackground=new JMenuItem("Text area background");
+	private JMenuItem saveButton=new JMenuItem("Save ");
+	private JMenuItem editButton=new JMenuItem("Open");
+	private JMenuItem exitButton=new JMenuItem("Exit");
+	private JMenuItem colorButton=new JMenuItem("Text Color");
+	private JMenuItem backgroundButton=new JMenuItem("Background Color");
+	private JMenuItem textBackground=new JMenuItem("Text area background");
 	
-	JComboBox<String> family;
+	private JComboBox<String> family;
 	
-	JComboBox<String> style;
-	JComboBox<Integer> sizes;
+	private JComboBox<String> style;
+	private JComboBox<Integer> sizes;
 	
 	public Editor()
 	{
