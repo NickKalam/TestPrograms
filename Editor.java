@@ -402,10 +402,6 @@ public class Editor extends JFrame implements ActionListener
 		
 		return String.format("%02d:%02d:%02d %s", (current.getHour()==12?0:current.getHour()%12),current.getMinute(),current.getSecond(),(( current.getHour()<12 && current.getHour()>0)?" AM":" PM"));
 	}
-	
-	public void setVisible(boolean b) {
-		
-		super.setVisible(b);
-	}
+
 }
 
