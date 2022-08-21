@@ -1,17 +1,18 @@
 package editor;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 import javax.swing.JMenuItem;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
+
+import java.awt.List;
 import javax.swing.JFileChooser;
 //import 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import java.nio.file.FileSystems;
+
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.io.FileWriter;  
@@ -38,6 +39,10 @@ public class Editor extends JFrame implements ActionListener
 {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel panel;
 	private JLabel time;
 	private  String fontFamily=Font.SERIF;
@@ -52,17 +57,17 @@ public class Editor extends JFrame implements ActionListener
 	private  TextArea text=new TextArea("",50,125);
 	private  JTextField title=new JTextField();
 	
-	private JMenuItem saveButton=new JMenuItem("Save ");
-	private JMenuItem editButton=new JMenuItem("Open");
-	private JMenuItem exitButton=new JMenuItem("Exit");
-	private JMenuItem colorButton=new JMenuItem("Text Color");
-	private JMenuItem backgroundButton=new JMenuItem("Background Color");
-	private JMenuItem textBackground=new JMenuItem("Text area background");
+	JMenuItem saveButton=new JMenuItem("Save ");
+	JMenuItem editButton=new JMenuItem("Open");
+	JMenuItem exitButton=new JMenuItem("Exit");
+	JMenuItem colorButton=new JMenuItem("Text Color");
+	JMenuItem backgroundButton=new JMenuItem("Background Color");
+	JMenuItem textBackground=new JMenuItem("Text area background");
 	
-	private JComboBox<String> family;
+	List family;
 	
-	private JComboBox<String> style;
-	private JComboBox<Integer> sizes;
+	List style;
+	List  sizes;
 	
 	public Editor()
 	{
@@ -110,13 +115,17 @@ public class Editor extends JFrame implements ActionListener
 		backgroundButton=new JMenuItem("Background Color");
 		textBackground=new JMenuItem("Text area background");
 		
-		family =new JComboBox<String>(fontFamilies);
+		family =new List();
+		Arrays.stream(fontFamilies).forEach(el->family.add(el));
+		
 		family.setBackground(Color.LIGHT_GRAY);
 		
-		style=new JComboBox<String>(fontChoices);
+		style=new List();
+		Arrays.stream(fontChoices).forEach(el->style.add(el));
 		style.setBackground(Color.LIGHT_GRAY);
 		
-		sizes=new JComboBox<Integer>(sizeChoices);
+		sizes=new List();
+		Arrays.stream(sizeChoices).forEach(el->sizes.add(el.toString()));
 		sizes.setBackground(Color.LIGHT_GRAY);
 		
 		sizes.setPreferredSize(new Dimension(5,5));
@@ -126,12 +135,15 @@ public class Editor extends JFrame implements ActionListener
 		Box root=Box.createVerticalBox();
 		
 		JMenu menu=new JMenu("File");
+		JMenu customMenu=new JMenu("| Customize");
 		
+		JMenu customViewMenu=new JMenu("Customize view");
+		JMenu customTextMenu=new JMenu("Customize text");
+		customMenu.add(customViewMenu);
+		customMenu.add(customTextMenu);
 		
 		menu.add(saveButton);
 		menu.add(editButton);
-		
-		
 		menu.add(exitButton);
 		
 		saveButton.addActionListener(this);
@@ -146,15 +158,12 @@ public class Editor extends JFrame implements ActionListener
 		
 		family.addActionListener(this);
 		
-		colorButton.setBackground(Color.GRAY);
 		colorButton.addActionListener(this);
 		
-		backgroundButton.setBackground(Color.GRAY);
 		backgroundButton.addActionListener(this);
 		
-		textBackground.setBackground(Color.GRAY);
 		textBackground.addActionListener(this);
-		
+
 		text.setBackground(Color.DARK_GRAY);
 		root.add(title);
 		root.add(text);
@@ -164,18 +173,18 @@ public class Editor extends JFrame implements ActionListener
 		menuBar.setSize(100, 10);
 		menuBar.add(time);
 		menuBar.add(menu);
-		menuBar.add(new JLabel("|		   Font family : "));
-		menuBar.add(family);
-		menuBar.add(new JLabel("|     Style : "));
-		menuBar.add(style);
-		menuBar.add(new JLabel("|    Text size :"));
-		menuBar.add(sizes);
-		menuBar.add(new JLabel("|   "));
-		menuBar.add(colorButton);
-		menuBar.add(new JLabel("|   "));
-		menuBar.add(backgroundButton);
-		menuBar.add(new JLabel("|   "));
-		menuBar.add(textBackground);
+		menuBar.add(customMenu);
+		customTextMenu.add(colorButton);
+		customTextMenu.add(new JLabel("Font family"));
+		customTextMenu.add(family);
+		customTextMenu.add(new JLabel("Style"));
+		customTextMenu.add(style);
+		customTextMenu.add(new JLabel("Text size"));
+		customTextMenu.add(sizes);
+		
+		customViewMenu.add(textBackground);
+		customViewMenu.add(backgroundButton);
+	
 		menuBar.setBackground(Color.LIGHT_GRAY);
 		
 		this.add(panel);
@@ -183,6 +192,7 @@ public class Editor extends JFrame implements ActionListener
 		this.setTitle("EDITOR");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1200, 720);
+	
 	}
 	
 	public void actionPerformed(ActionEvent event)
@@ -236,32 +246,32 @@ public class Editor extends JFrame implements ActionListener
 		}
 		else if(event.getSource()==sizes)
 		{
-			 if((int)sizes.getSelectedItem()>12)
+			 if(Integer.parseInt(sizes.getSelectedItem())>12)
 			 {
 				 text.setColumns(110);
 				 text.setRows(43);
 			 }
-			 if((int)sizes.getSelectedItem()>13)
+			 if(Integer.parseInt(sizes.getSelectedItem())>13)
 			 {
 				 text.setColumns(105);
 				 text.setRows(38);
 			 }
-			 else if((int)sizes.getSelectedItem()>14)
+			 else if(Integer.parseInt(sizes.getSelectedItem())>14)
 			 {
 				 text.setColumns(100);
 				 text.setRows(35);
 			 }
-			 else if((int)sizes.getSelectedItem()>15)
+			 else if(Integer.parseInt(sizes.getSelectedItem())>15)
 			 {
 				 text.setColumns(90);
 				 text.setRows(30);
 			 }
-			 else if((int)sizes.getSelectedItem()>16)
+			 else if(Integer.parseInt(sizes.getSelectedItem())>16)
 			 {
 				 text.setColumns(20);
 				 text.setRows(2);
 			 }
-			 else if((int)sizes.getSelectedItem()==21)
+			 else if(Integer.parseInt(sizes.getSelectedItem())==21)
 			 {
 				 text.setColumns(20);
 				 text.setRows(0);
@@ -271,7 +281,7 @@ public class Editor extends JFrame implements ActionListener
 				 text.setColumns(125);
 				 text.setRows(50);
 			 }
-			fontSize=(int)sizes.getSelectedItem();
+			fontSize=Integer.parseInt(sizes.getSelectedItem());
 			
 			text.setFont(new Font(fontFamily,fontType,fontSize));
 			
@@ -329,7 +339,7 @@ public class Editor extends JFrame implements ActionListener
 				title.setVisible(editting);
 			} 
 			catch (IOException e) {
-				// TODO Auto-generated catch block
+				
 				JOptionPane.showMessageDialog(null, "Contents weren't saved .","ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 
@@ -348,7 +358,7 @@ public class Editor extends JFrame implements ActionListener
 			}
 			catch (IOException | NullPointerException e)
 			{
-				// TODO Auto-generated catch block
+				
 				JOptionPane.showMessageDialog(null, "File didn't open","ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 			
@@ -381,7 +391,7 @@ public class Editor extends JFrame implements ActionListener
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
+			
 			JOptionPane.showMessageDialog(null, "File didn't open","ERROR",JOptionPane.ERROR_MESSAGE);
 		}
 		
@@ -402,6 +412,4 @@ public class Editor extends JFrame implements ActionListener
 		
 		return String.format("%02d:%02d:%02d %s", (current.getHour()==12?0:current.getHour()%12),current.getMinute(),current.getSecond(),(( current.getHour()<12 && current.getHour()>0)?" AM":" PM"));
 	}
-
 }
-
