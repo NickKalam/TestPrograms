@@ -115,16 +115,16 @@ public class Editor extends JFrame implements ActionListener
 		backgroundButton=new JMenuItem("Background Color");
 		textBackground=new JMenuItem("Text area background");
 		
-		family =new List();
+		family =new List(1);
 		Arrays.stream(fontFamilies).forEach(el->family.add(el));
 		
 		family.setBackground(Color.LIGHT_GRAY);
 		
-		style=new List();
+		style=new List(1);
 		Arrays.stream(fontChoices).forEach(el->style.add(el));
 		style.setBackground(Color.LIGHT_GRAY);
 		
-		sizes=new List();
+		sizes=new List(1);
 		Arrays.stream(sizeChoices).forEach(el->sizes.add(el.toString()));
 		sizes.setBackground(Color.LIGHT_GRAY);
 		
